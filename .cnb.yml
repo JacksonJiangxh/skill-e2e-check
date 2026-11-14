@@ -16,3 +16,19 @@ main:
       failStages:
         - name: notify-failure
           script: echo "build failed at stage ${CNB_BUILD_FAILED_STAGE_NAME} msg ${CNB_BUILD_FAILED_MSG}"
+
+# api_trigger 验证入口（供 CI 触发 e2e 复现）
+$:  # 仓库级事件挂 $ 键（skill 红线 2）
+  api_trigger:
+    - name: api-e2e
+      runner:
+        cpus: 1
+      docker:
+        image: node:20
+      stages:
+        - name: install
+          script: npm install --no-audit --no-fund
+        - name: build
+          script: npm run build
+        - name: test
+          script: npm test
