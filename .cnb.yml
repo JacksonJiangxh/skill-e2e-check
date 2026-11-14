@@ -1,0 +1,18 @@
+# CNB e2e 验证：skill 模板 cnb-ci.yml 改造版（runner.cpus: 1 按皇上要求）
+main:
+  push:
+    - name: ci-build
+      runner:
+        cpus: 1
+      docker:
+        image: node:20
+      stages:
+        - name: install
+          script: npm install --no-audit --no-fund
+        - name: build
+          script: npm run build
+        - name: test
+          script: npm test
+      failStages:
+        - name: notify-failure
+          script: echo "build failed at stage ${CNB_BUILD_FAILED_STAGE_NAME} msg ${CNB_BUILD_FAILED_MSG}"

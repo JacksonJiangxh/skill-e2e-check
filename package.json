@@ -1,0 +1,10 @@
+{
+  "name": "skill-e2e-sample",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node -e \"console.log('build ok')\"",
+    "test": "node -e \"console.log('test ok: 2+2=4')\"",
+    "lint": "node -e \"console.log('lint ok')\""
+  }
+}
